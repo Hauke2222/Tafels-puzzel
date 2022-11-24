@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="base.css" rel="stylesheet" />
+  </head>
+  <body id="app">
+    <div>{{ message }}</div>
 
-</head>
-<body id="app">
+    <div class="wrapper">
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+      <div class="box">1</div>
+    </div>
 
-<div >{{ message }}</div>
-
-
-<script>
-  const { createApp } = Vue
-
-  createApp({
-    data() {
-      return {
-        message: 'Hello'
-      }
-    }
-  }).mount('#app')
-</script>
-
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>
