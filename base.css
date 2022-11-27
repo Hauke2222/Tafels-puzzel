@@ -1,17 +1,19 @@
-
 .box {
-    background-color: lightgrey;
-    color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 150%;
-  }
-  
-  .wrapper {
-    width: 600px;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(5, 100px);
-    grid-template-rows: repeat(5, 100px);
-    grid-auto-flow: column;
-  }
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 150%;
+}
+
+.wrapper {
+  margin: auto 0;
+  width: 600px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(5, 75px);
+  grid-template-rows: repeat(10, 75px);
+  grid-auto-flow: column;
+}
