@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      message: "Test",
+      table: 9,
       boardTiles: [
         [],
         [],
@@ -88,7 +88,7 @@ createApp({
   },
   computed: {},
   mounted() {
-    this.genBoard(9);
+    this.genBoard(this.table);
     this.shuffleBoard(this.boardTiles)
     console.log(this.boardTiles);
   },

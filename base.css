@@ -1,19 +1,29 @@
+html {
+  background-color: #f6f5ed;
+ }
+
 .box {
-  background-color: black;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   border-radius: 5px;
   font-size: 150%;
+  border-color: black;
+  border-style: dashed;
+  border-width: 1px;
 }
 
 .wrapper {
-  margin: auto 0;
-  width: 600px;
+  margin: auto;
+  width: 320px;
   display: grid;
   grid-gap: 5px;
-  grid-template-columns: repeat(5, 75px);
-  grid-template-rows: repeat(10, 75px);
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(10, 60px);
   grid-auto-flow: column;
 }
+
+ h1:first-of-type{
+  text-align: center;
+ }
