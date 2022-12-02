@@ -1,6 +1,6 @@
 html {
   background-color: #f6f5ed;
- }
+}
 
 .box {
   background-color: white;
@@ -12,6 +12,7 @@ html {
   border-color: black;
   border-style: dashed;
   border-width: 1px;
+  width: 58px;
 }
 
 .wrapper {
@@ -24,6 +25,6 @@ html {
   grid-auto-flow: column;
 }
 
- h1:first-of-type{
+h1:first-of-type {
   text-align: center;
- }
+}
