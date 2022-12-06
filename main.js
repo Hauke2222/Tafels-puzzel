@@ -79,18 +79,17 @@ function genBoard(table) {
 }
 
 function displayBoard(array) {
-  let wrapper = document.getElementsByClassName("wrapper")
-  console.log(wrapper);
-
+  let wrapper = document.getElementById("wrapper")
   for (let index = 0; index < array.length; index++) {
     let div = document.createElement("div");
-    // div.innerHTML = array[index];
+    div.innerHTML = array[index];
+    div.classList.add("box");
     wrapper.appendChild(div)
     
   }
 }
 
 genBoard(table);
-shuffleBoard(boardTiles);
+// shuffleBoard(boardTiles);
 displayBoard(boardTiles);
 console.log(boardTiles);
