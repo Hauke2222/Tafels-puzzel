@@ -1,6 +1,6 @@
 html {
   background-color: #f6f5ed;
- }
+}
 
 .box {
   background-color: white;
@@ -14,7 +14,7 @@ html {
   border-width: 1px;
 }
 
-.wrapper {
+#wrapper {
   margin: auto;
   width: 320px;
   display: grid;
@@ -24,6 +24,6 @@ html {
   grid-auto-flow: column;
 }
 
- h1:first-of-type{
+h1:first-of-type {
   text-align: center;
- }
+}
