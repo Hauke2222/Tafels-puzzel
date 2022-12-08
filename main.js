@@ -69,7 +69,7 @@ function shuffleBoard(array) {
   }
 }
 
-function genBoard(table) {
+function fillArr(table) {
   for (let i = 1; i < 11; i++) {
     boardTiles[i - 1] = i;
     boardTiles[i + 9] = "*";
@@ -79,55 +79,53 @@ function genBoard(table) {
   }
 }
 
-function displayBoard(array) {
+function createBoard(arr) {
   let wrapper = document.getElementById("wrapper");
-  for (let index = 0; index < array.length; index++) {
+  wrapper.innerHTML = ''
+  for (let index = 0; index < arr.length; index++) {
     let div = document.createElement("div");
-    div.innerHTML = array[index];
+    div.innerHTML = arr[index];
     div.id = index;
     div.classList.add("box");
     wrapper.appendChild(div);
   }
+  const onClick = (e) => {
+    console.log(e.target.id);
+    nextToEmptyTile(e.target.id, boardTiles);
+  };
+  
+  document.querySelectorAll(".box").forEach((el) => {
+    el.addEventListener("click", onClick);
+  });
+  
 }
 
-function nextToEmptyTile(key) {
+function nextToEmptyTile(key, arr) {
   key = parseInt(key);
-  // console.log("test", key);
-  let empty = boardTiles.indexOf("empty");
-
-  console.log(typeof empty);
-  console.log(key, empty);
+  let empty = arr.indexOf("empty");
 
   switch ("empty") {
-    case boardTiles[key + 1]:
-      console.log("+1");
+    case arr[key + 1]:
+      [arr[empty], arr[key]] = [arr[key], arr[empty]];
+      displayBoard(arr);
       break;
-    case boardTiles[key - 1]:
-      console.log("-1");
+    case arr[key - 1]:
+      [arr[empty], arr[key]] = [arr[key], arr[empty]];
+      displayBoard(arr);
       break;
-    case boardTiles[key + 10]:
-      console.log("+10");
+    case arr[key + 10]:
+      [arr[empty], arr[key]] = [arr[key], arr[empty]];
+      displayBoard(arr);
       break;
-    case boardTiles[key - 10]:
-      console.log("-10");
+    case arr[key - 10]:
+      [arr[empty], arr[key]] = [arr[key], arr[empty]];
+      displayBoard();
       break;
-
     default:
-      console.log("default");
       break;
   }
 }
 
-genBoard(table);
+fillArr(table);
 // shuffleBoard(boardTiles);
-displayBoard(boardTiles);
-console.log(boardTiles);
-
-const onClick = (e) => {
-  console.log(e.target.id);
-  nextToEmptyTile(e.target.id);
-};
-
-document.querySelectorAll(".box").forEach((el) => {
-  el.addEventListener("click", onClick);
-});
+createBoard(boardTiles);
