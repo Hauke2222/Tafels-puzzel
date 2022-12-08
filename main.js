@@ -1,57 +1,5 @@
 let table = 9;
-let boardTiles = [
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  "empty",
-];
+let boardTiles = [];
 
 function shuffleBoard(array) {
   let m = array.length;
@@ -77,6 +25,7 @@ function fillArr(table) {
     boardTiles[i + 29] = "=";
     boardTiles[i + 39] = i * table;
   }
+  boardTiles.push('empty')
 }
 
 function createBoard(arr) {
@@ -107,19 +56,19 @@ function nextToEmptyTile(key, arr) {
   switch ("empty") {
     case arr[key + 1]:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      displayBoard(arr);
+      createBoard(arr);
       break;
     case arr[key - 1]:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      displayBoard(arr);
+      createBoard(arr);
       break;
     case arr[key + 10]:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      displayBoard(arr);
+      createBoard(arr);
       break;
     case arr[key - 10]:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      displayBoard();
+      createBoard();
       break;
     default:
       break;
