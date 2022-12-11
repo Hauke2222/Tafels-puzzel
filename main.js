@@ -1,6 +1,7 @@
 let table = 9;
 const nbRows = 10;
 let boardTiles = [];
+let greyBackup;
 
 function shuffleBoard(array) {
   let m = array.length;
@@ -21,13 +22,14 @@ function shuffleBoard(array) {
 function fillArr(table) {
   document.getElementsByTagName("h1")[0].innerHTML = `Tafel van ${table}.`;
   for (let i = 1; i < 11; i++) {
-    boardTiles[i - 1] = i;
-    boardTiles[i + 9] = "*";
-    boardTiles[i + 19] = table;
-    boardTiles[i + 29] = "=";
-    boardTiles[i + 39] = i * table;
+    boardTiles[i - 1] = { val: i, empty: false };
+    boardTiles[i + 9] = { val: "*", empty: false };
+    boardTiles[i + 19] = { val: table, empty: false };
+    boardTiles[i + 29] = { val: "=", empty: false };
+    boardTiles[i + 39] = { val: i * table, empty: false };
   }
-  boardTiles.push("empty");
+  boardTiles[49].empty = true;
+  greyBackup = boardTiles[49];
 }
 
 function createBoard(arr) {
@@ -35,7 +37,7 @@ function createBoard(arr) {
   wrapper.innerHTML = "";
   for (let index = 0; index < arr.length; index++) {
     let div = document.createElement("div");
-    div.innerHTML = arr[index];
+    div.innerHTML = arr[index].val;
     div.id = index;
     div.classList.add("box");
     if (div.id == 49) {
@@ -62,7 +64,9 @@ function getRow(position) {
 
 function nextToEmptyTile(key, arr) {
   key = parseInt(key);
-  let empty = arr.indexOf("empty");
+  const empty = arr.findIndex(index => index.empty=== true);
+
+  console.log(empty);
 
   // rule: je mag niet EN van rij EN van kolom veranderen
   if (getColumn(key) !== getColumn(empty) && getRow(key) !== getRow(empty)) {
@@ -70,26 +74,26 @@ function nextToEmptyTile(key, arr) {
     return;
   }
 
-  switch ("empty") {
-    case arr[key + 1]:
+  switch (true) {
+    case arr[key + 1].empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      createBoard(arr);
       break;
-    case arr[key - 1]:
+    case arr[key - 1].empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      createBoard(arr);
       break;
-    case arr[key + 10]:
+    case arr[key + 10].empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      createBoard(arr);
       break;
-    case arr[key - 10]:
+    case arr[key - 10].empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
-      createBoard(arr);
       break;
     default:
       break;
   }
+  arr[key].empty = true
+  arr[empty].empty = false
+  createBoard(arr);
+
 }
 
 fillArr(table);
