@@ -47,6 +47,13 @@ function createBoard(arr) {
     }
     wrapper.appendChild(div);
   }
+  let p = document.getElementById("solved");
+  if (JSON.stringify(boardTiles) === JSON.stringify(solvedBoard)) {
+    p.innerHTML = "U heeft de puzzel opgelost.";
+  } else {
+    p.innerHTML = "";
+  }
+
   const onClick = (e) => {
     nextToEmptyTile(e.target.id, boardTiles);
   };
@@ -97,6 +104,7 @@ function nextToEmptyTile(key, arr) {
 }
 
 fillArr(table);
+solvedBoard = JSON.parse(JSON.stringify(boardTiles));
 // solvedBoard = boardTiles;
 // shuffleBoard(boardTiles);
 createBoard(boardTiles);
