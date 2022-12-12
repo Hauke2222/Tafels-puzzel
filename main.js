@@ -1,7 +1,7 @@
 let table = 9;
 const nbRows = 10;
 let boardTiles = [];
-let greyBackup;
+let solvedBoard = [];
 
 function shuffleBoard(array) {
   let m = array.length;
@@ -29,7 +29,6 @@ function fillArr(table) {
     boardTiles[i + 39] = { val: i * table, empty: false };
   }
   boardTiles[49].empty = true;
-  greyBackup = boardTiles[49];
 }
 
 function createBoard(arr) {
@@ -42,6 +41,9 @@ function createBoard(arr) {
     div.classList.add("box");
     if (div.id == 49) {
       div.classList.add("gray");
+    }
+    if (arr[index].empty === true && div.id != 49) {
+      div.innerHTML = " ";
     }
     wrapper.appendChild(div);
   }
@@ -64,9 +66,7 @@ function getRow(position) {
 
 function nextToEmptyTile(key, arr) {
   key = parseInt(key);
-  const empty = arr.findIndex(index => index.empty=== true);
-
-  console.log(empty);
+  const empty = arr.findIndex((index) => index.empty === true);
 
   // rule: je mag niet EN van rij EN van kolom veranderen
   if (getColumn(key) !== getColumn(empty) && getRow(key) !== getRow(empty)) {
@@ -75,27 +75,28 @@ function nextToEmptyTile(key, arr) {
   }
 
   switch (true) {
-    case arr[key + 1].empty:
+    case arr[key + 1]?.empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
       break;
-    case arr[key - 1].empty:
+    case arr[key - 1]?.empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
       break;
-    case arr[key + 10].empty:
+    case arr[key + 10]?.empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
       break;
-    case arr[key - 10].empty:
+    case arr[key - 10]?.empty:
       [arr[empty], arr[key]] = [arr[key], arr[empty]];
       break;
     default:
-      break;
+      return;
   }
-  arr[key].empty = true
-  arr[empty].empty = false
-  createBoard(arr);
+  arr[key].empty = true;
+  arr[empty].empty = false;
 
+  return createBoard(arr);
 }
 
 fillArr(table);
+// solvedBoard = boardTiles;
 // shuffleBoard(boardTiles);
 createBoard(boardTiles);
