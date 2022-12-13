@@ -4,6 +4,7 @@ let boardTiles = [];
 let solvedBoard = [];
 
 function shuffleBoard(array) {
+  let greyTile = array.pop();
   let m = array.length;
   let t, i;
 
@@ -17,6 +18,7 @@ function shuffleBoard(array) {
     array[m] = array[i];
     array[i] = t;
   }
+  array.push(greyTile);
 }
 
 function fillArr(table) {
@@ -47,11 +49,20 @@ function createBoard(arr) {
     }
     wrapper.appendChild(div);
   }
+
   let p = document.getElementById("solved");
   if (JSON.stringify(boardTiles) === JSON.stringify(solvedBoard)) {
     p.innerHTML = "U heeft de puzzel opgelost.";
+    wrapper.classList.add("solved");
+    document.querySelectorAll(".box").forEach((el) => {
+      el.classList.add("solved");
+    });
   } else {
     p.innerHTML = "";
+    wrapper.classList.remove("solved");
+    document.querySelectorAll(".box").forEach((el) => {
+      el.classList.remove("solved");
+    });
   }
 
   const onClick = (e) => {
@@ -105,6 +116,5 @@ function nextToEmptyTile(key, arr) {
 
 fillArr(table);
 solvedBoard = JSON.parse(JSON.stringify(boardTiles));
-// solvedBoard = boardTiles;
-// shuffleBoard(boardTiles);
+shuffleBoard(boardTiles);
 createBoard(boardTiles);
