@@ -3,7 +3,7 @@ const nbRows = 10;
 let boardTiles = [];
 let solvedBoard = [];
 
-function shuffleBoard(array) {
+function shuffle(array) {
   let greyTile = array.pop();
   let m = array.length;
   let t, i;
@@ -22,7 +22,6 @@ function shuffleBoard(array) {
 }
 
 function fillArr(table) {
-  document.getElementsByTagName("h1")[0].innerHTML = `Tafel van ${table}.`;
   for (let i = 1; i < 11; i++) {
     boardTiles[i - 1] = { val: i, empty: false };
     boardTiles[i + 9] = { val: "*", empty: false };
@@ -65,13 +64,7 @@ function createBoard(arr) {
     });
   }
 
-  const onClick = (e) => {
-    nextToEmptyTile(e.target.id, boardTiles);
-  };
-
-  document.querySelectorAll(".box").forEach((el) => {
-    el.addEventListener("click", onClick);
-  });
+  return setEventListeners();
 }
 
 function getColumn(position) {
@@ -114,7 +107,26 @@ function nextToEmptyTile(key, arr) {
   return createBoard(arr);
 }
 
-fillArr(table);
-solvedBoard = JSON.parse(JSON.stringify(boardTiles));
-shuffleBoard(boardTiles);
-createBoard(boardTiles);
+function setEventListeners() {
+  document.getElementById("table").addEventListener("change", (e) => {
+    table = e.target.value;
+    main(table);
+  });
+
+  const onClick = (e) => {
+    nextToEmptyTile(e.target.id, boardTiles);
+  };
+
+  document.querySelectorAll(".box").forEach((el) => {
+    el.addEventListener("click", onClick);
+  });
+}
+
+function main(table) {
+  fillArr(table);
+  solvedBoard = JSON.parse(JSON.stringify(boardTiles));
+  shuffle(boardTiles);
+  createBoard(boardTiles);
+}
+
+main(table);
