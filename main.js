@@ -34,7 +34,9 @@ function fillArr(table) {
 
 function createBoard(arr) {
   let wrapper = document.getElementById("wrapper");
-  wrapper.innerHTML = "";
+  while (wrapper.firstChild) {
+    wrapper.removeChild(wrapper.firstChild);
+  }
   for (let index = 0; index < arr.length; index++) {
     let div = document.createElement("div");
     div.innerHTML = arr[index].val;
@@ -110,7 +112,12 @@ function nextToEmptyTile(key, arr) {
 function setEventListeners() {
   document.getElementById("table").addEventListener("change", (e) => {
     table = e.target.value;
+    let all = document.getElementsByTagName("*");
+    console.log(all);
+    clearElements();
     main(table);
+    all = document.getElementsByTagName("*");
+    console.log(all);
   });
 
   const onClick = (e) => {
