@@ -35,8 +35,9 @@ function fillArr(table) {
 function createBoard(arr) {
   let wrapper = document.getElementById("wrapper");
   while (wrapper.firstChild) {
-    wrapper.removeChild(wrapper.firstChild);
+    wrapper.removeChild(wrapper.lastChild);
   }
+
   for (let index = 0; index < arr.length; index++) {
     let div = document.createElement("div");
     div.innerHTML = arr[index].val;
@@ -66,7 +67,23 @@ function createBoard(arr) {
     });
   }
 
-  return setEventListeners();
+  const onClick = (e) => {
+    nextToEmptyTile(e.target.id, boardTiles);
+  };
+
+  document.querySelectorAll(".box").forEach((el) => {
+    el.addEventListener("click", onClick);
+  });
+
+  const onChange = (e) => {
+    document.getElementById("table").removeEventListener("change", onChange);
+    table = e.target.value;
+    main(table);
+  };
+
+  document.getElementById("table").addEventListener("change", onChange);
+
+  return;
 }
 
 function getColumn(position) {
@@ -107,26 +124,6 @@ function nextToEmptyTile(key, arr) {
   arr[empty].empty = false;
 
   return createBoard(arr);
-}
-
-function setEventListeners() {
-  document.getElementById("table").addEventListener("change", (e) => {
-    table = e.target.value;
-    let all = document.getElementsByTagName("*");
-    console.log(all);
-    clearElements();
-    main(table);
-    all = document.getElementsByTagName("*");
-    console.log(all);
-  });
-
-  const onClick = (e) => {
-    nextToEmptyTile(e.target.id, boardTiles);
-  };
-
-  document.querySelectorAll(".box").forEach((el) => {
-    el.addEventListener("click", onClick);
-  });
 }
 
 function main(table) {
