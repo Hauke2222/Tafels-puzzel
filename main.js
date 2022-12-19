@@ -2,6 +2,7 @@ let table = 9;
 const nbRows = 10;
 let boardTiles = [];
 let solvedBoard = [];
+let moves;
 
 function shuffle(array) {
   let greyTile = array.pop();
@@ -54,7 +55,7 @@ function createBoard(arr) {
 
   let p = document.getElementById("solved");
   if (JSON.stringify(boardTiles) === JSON.stringify(solvedBoard)) {
-    p.innerHTML = "U heeft de puzzel opgelost.";
+    p.innerHTML = `U heeft de puzzel opgelost in ${moves} stappen.`;
     wrapper.classList.add("solved");
     document.querySelectorAll(".box").forEach((el) => {
       el.classList.add("solved");
@@ -122,11 +123,13 @@ function nextToEmptyTile(key, arr) {
   }
   arr[key].empty = true;
   arr[empty].empty = false;
+  moves += 1;
 
   return createBoard(arr);
 }
 
 function main(table) {
+  moves = 0;
   fillArr(table);
   solvedBoard = JSON.parse(JSON.stringify(boardTiles));
   shuffle(boardTiles);
